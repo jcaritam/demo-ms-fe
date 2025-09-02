@@ -1,27 +1,42 @@
 {
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "Content-Security-Policy", "value": "frame-ancestors 'self' https://admin-postulante-dev.utpxpedition.com" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" }
-      ]
-    }
-  ],
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "routes": [
+    {
+      "src": "^/(assets/.*)$",
+      "dest": "/$1",
+      "headers": {
+        "Content-Security-Policy": "frame-ancestors 'self' https://admin-postulante-dev.utpxpedition.com",
+        "X-Frame-Options": "SAMEORIGIN"
+      }
+    },
     {
       "src": "^/(|index\\.html)$",
       "has": [
         { "type": "header", "key": "sec-fetch-dest", "value": "iframe" },
         { "type": "header", "key": "referer", "value": "^https://admin-postulante-dev\\.utpxpedition\\.com(/|$)" }
       ],
-      "dest": "/index.html"
+      "dest": "/index.html",
+      "headers": {
+        "Content-Security-Policy": "frame-ancestors 'self' https://admin-postulante-dev.utpxpedition.com",
+        "X-Frame-Options": "SAMEORIGIN"
+      }
     },
     {
       "src": "^/(|index\\.html)$",
       "status": 403,
-      "dest": "/403.html"
+      "dest": "/403.html",
+      "headers": {
+        "Content-Security-Policy": "frame-ancestors 'self' https://admin-postulante-dev.utpxpedition.com",
+        "X-Frame-Options": "SAMEORIGIN"
+      }
     },
-    { "src": "/(.*)", "dest": "/$1" }
+    {
+      "src": "/(.*)",
+      "dest": "/$1",
+      "headers": {
+        "Content-Security-Policy": "frame-ancestors 'self' https://admin-postulante-dev.utpxpedition.com",
+        "X-Frame-Options": "SAMEORIGIN"
+      }
+    }
   ]
 }
